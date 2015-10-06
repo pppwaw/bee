@@ -17,11 +17,14 @@ $password=$row[$psdl];
 $psd = md5(md5($_GET['psd']).$salt);
 session_id(md5(md5($_GET['username'])));
 session_start();
-if($psd==$password){
+if($psd==$password)
+{
     $_SESSION['islogin'] = "yes";
-    $_SESSION['ip'] = $_SERVER["REMOTE_ADDR"];
+    $_SESSION['ip'] = $_GET["ip"];
     echo "yes";  
-}else {
+}
+else 
+{
     echo 'no';
 }
 $rs->free_result();
