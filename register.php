@@ -25,7 +25,7 @@ if(mysqli_connect_errno())
     echo mysqli_connect_error();
     exit;
 }
-if(!isset($_GET['id']))
+if(isset($_GET['id']))
 {
     session_id($_GET['id']);
 }else{
