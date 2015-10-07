@@ -33,7 +33,7 @@ if(isset($_GET['id']))
     exit;
 }
 session_start();
-if($_SESSION['check'] !=$showing)
+if($_SESSION['check'] !=$showing||$showing=="")
 {
     echo"bee6";
     session_destroy();
