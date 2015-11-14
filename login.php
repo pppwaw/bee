@@ -9,9 +9,11 @@ if(mysqli_connect_errno())
     exit;
 }
 $username=htmlspecialchars($_GET['username']);
-$sql="SELECT * FROM ".$table." where ".$userl."='".$username."'";       
-$rs=mysqli_query($mysqli,$sql);
-$row=mysqli_fetch_assoc($rs);
+$sql="SELECT * FROM ".$table." where ".$userl."=?";
+$stmt=$mysqli->prepare($sql);
+$stmt->bind_param('s', $username);
+$result=$stmt->get_result();
+$row=$result->fetch_all(MYSQLI_ASSOC);
 $salt=$row[$saltl];
 $password=$row[$psdl];
 $psd = md5(md5($_GET['psd']).$salt);
