@@ -54,37 +54,51 @@ elseif($password!=$pwd_again)
 }  
 else  
 {  
-    $sql2="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$macl."='$mac'"; 
-    $result1=mysqli_query($mysqli,$sql2);
-	$count=mysqli_affected_rows($mysqli);
+    $sql2="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$macl."=?"; 
+    $stmt2=$mysqli->prepare($sql2);
+    $stmt2->bind_param("s",$mac);
+    $stmt2->execute();
+    $result1=$stmt2->get_result();
+    $resultdata1=$result1->fetch_all(MYSQLI_ASSOC);
+	$count=count($resultdata1);
         if ($count>$maxreg-1)
         {
             echo"bee3";
             session_destroy();
             exit ();    
         }
-        $sql3="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$regipl."='$regip'"; 
-		$result2=mysqli_query($mysqli,$sql3);
-        $count2=mysqli_affected_rows($mysqli); 
+        $sql3="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$regipl."=?";
+        $stmt3=$mysqli->prepare($sql3);
+        $stmt3->bind_param("s",$regip);
+        $stmt3->execute();
+        $result2=$stmt3->get_result();
+        $resultdata2=$result2->fetch_all(MYSQLI_ASSOC);
+        $count2=count($resultdata2);
         if ($count2>$maxreg-1)
         {
             echo"bee3";
             session_destroy();
             exit ();    
         }
-        $sql1= "SELECT * FROM ".$table." WHERE ".$userl."='$name'"; 
-        $rs=mysqli_query($mysqli,$sql1);                                          
-        $row=mysqli_affected_rows($mysqli);                                    
-        if ($row)
+        $sql1= "SELECT * FROM ".$table." WHERE ".$userl."=?"; 
+        $stmt1=$mysqli->prepare($sql1);
+        $stmt1->bind_param("s",$name);
+        $stmt1->execute();
+        $result3=$stmt1->get_result();
+        $resultdata3=$result3->fetch_all(MYSQLI_ASSOC);
+        $count3=count($resultdata3);                                 
+        if ($count3>0)
         {                                                             
             echo "bee0";  
             session_destroy();
             exit ();
         }
         $password=md5(md5($password).$salt);
-        $sql="INSERT INTO ".$table." (".$userl.", ".$psdl.", ".$regipl.", ".$saltl.", ".$macl.") VALUES ('$name','$password','$regip','$salt','$mac')";
-        $result=mysqli_query($mysqli,$sql);  
-        if(!$result)  
+        $sql="INSERT INTO ".$table." (".$userl.", ".$psdl.", ".$regipl.", ".$saltl.", ".$macl.") VALUES (?,?,?,?,?)";
+        $stmt4 = $mysqli->prepare($sql);
+        $stmt4->bind_param('sssss', $name, $password, $regip,$salt,$mac);
+        $stmt4->execute();
+        if($stmt4->affected_rows)  
         {  
             echo"bee4";
             session_destroy();
