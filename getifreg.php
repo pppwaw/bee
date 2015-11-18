@@ -8,8 +8,7 @@ $sql1= "SELECT * FROM ".$table." WHERE ".$userl."=?";
 $stmt1=$mysqli->prepare($sql1);
 $stmt1->bind_param("s",$name);
 $stmt1->execute();
-$result3=$stmt1->get_result();
-$resultdata3=$result3->fetch_all(MYSQLI_ASSOC);
+$resultdata3=mysqli_affected_rows();
 $count3=count($resultdata3);                                 
 if ($count3>0)
 {

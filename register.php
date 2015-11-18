@@ -58,8 +58,7 @@ else
     $stmt2=$mysqli->prepare($sql2);
     $stmt2->bind_param("s",$mac);
     $stmt2->execute();
-    $result1=$stmt2->get_result();
-    $resultdata1=$result1->fetch_all(MYSQLI_ASSOC);
+    $resultdata1=mysqli_affected_rows();
 	$count=count($resultdata1);
         if ($count>$maxreg-1)
         {
@@ -71,8 +70,7 @@ else
         $stmt3=$mysqli->prepare($sql3);
         $stmt3->bind_param("s",$regip);
         $stmt3->execute();
-        $result2=$stmt3->get_result();
-        $resultdata2=$result2->fetch_all(MYSQLI_ASSOC);
+        $resultdata2=mysqli_affected_rows();
         $count2=count($resultdata2);
         if ($count2>$maxreg-1)
         {
@@ -84,8 +82,7 @@ else
         $stmt1=$mysqli->prepare($sql1);
         $stmt1->bind_param("s",$name);
         $stmt1->execute();
-        $result3=$stmt1->get_result();
-        $resultdata3=$result3->fetch_all(MYSQLI_ASSOC);
+        $resultdata3=mysqli_affected_rows();;
         $count3=count($resultdata3);                                 
         if ($count3>0)
         {                                                             
@@ -98,7 +95,7 @@ else
         $stmt4 = $mysqli->prepare($sql);
         $stmt4->bind_param('sssss', $name, $password, $regip,$salt,$mac);
         $stmt4->execute();
-        if($stmt4->affected_rows)  
+        if(!mysqli_affected_rows()>0)  
         {  
             echo"bee4";
             session_destroy();
