@@ -91,8 +91,7 @@ else
         $sql="INSERT INTO ".$table." (".$userl.", ".$psdl.", ".$regipl.", ".$saltl.", ".$macl.") VALUES (?,?,?,?,?)";
         $stmt4 = $mysqli->prepare($sql);
         $stmt4->bind_param('sssss', $name, $password, $regip,$salt,$mac);
-        $stmt4->execute();
-        if(!count($stmt4->get_result()->fetch_all(MYSQLI_ASSOC))>0)  
+        if(!$stmt4->execute())
         {  
             echo"bee4";
             session_destroy();
