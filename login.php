@@ -14,8 +14,8 @@ $stmt=$mysqli->prepare($sql);
 $stmt->bind_param('s', $username);
 $stmt->execute();
 $row=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-$salt=$row[$saltl];
-$password=$row[$psdl];
+$salt=$row[0][$saltl];
+$password=$row[0][$psdl];
 $psd = md5(md5($_GET['psd']).$salt);
 session_id(md5(md5($_GET['username'])));
 session_start();
@@ -29,6 +29,5 @@ else
 {
     echo 'no';
 }
-$rs->free_result();
 //核心代码结束
 ?>
