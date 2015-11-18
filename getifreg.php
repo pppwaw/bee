@@ -14,12 +14,12 @@ $count3=count($resultdata3);
 if ($count3>0)
 {
     echo "yes";
-    exit ();
+    exit (0);
 }
 else
 {
     echo "no";
-    exit();
+    exit(0);
 }
 //核心代码结束
 ?>

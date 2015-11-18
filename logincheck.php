@@ -6,19 +6,19 @@ session_id(md5($_GET['username']));
 session_start();
 if ($_GET['username']==""){
     echo "no";
-    exit;
+    exit(0);
 }
 elseif($_GET['ip']==""){
     echo "no";
-    exit;
+    exit(0);
 }
 elseif(md5(md5($_SESSION['ip'])) != $_GET['ip']){
     echo "no";
-    exit;
+    exit(0);
 }
 elseif($_GET['spsd']!=md5(md5($spsd))){
     echo "badserver";
-    exit;
+    exit(0);
 }
 else
 {

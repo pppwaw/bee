@@ -23,33 +23,33 @@ $showing=$_GET['code'];
 if(mysqli_connect_errno())
 {
     echo mysqli_connect_error();
-    exit;
+    exit(0);
 }
 if(isset($_GET['id']))
 {
     session_id($_GET['id']);
 }else{
     echo "bee5";
-    exit;
+    exit(0);
 }
 session_start();
 if($_SESSION['check'] !=$showing||$showing=="")
 {
     echo"bee6";
     session_destroy();
-    exit;
+    exit(0);
 }
 if($name==""|| $password=="")  
 {  
     echo"bee1"; 
     session_destroy();
-    exit;
+    exit(0);
 }  
 elseif($password!=$pwd_again)  
 {  
     echo"bee2"; 
     session_destroy();
-    exit;  
+    exit(0);  
       
 }  
 else  
@@ -65,7 +65,7 @@ else
         {
             echo"bee3";
             session_destroy();
-            exit ();    
+            exit(0);    
         }
         $sql3="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$regipl."=?";
         $stmt3=$mysqli->prepare($sql3);
@@ -78,7 +78,7 @@ else
         {
             echo"bee3";
             session_destroy();
-            exit ();    
+            exit(0);    
         }
         $sql1= "SELECT * FROM ".$table." WHERE ".$userl."=?"; 
         $stmt1=$mysqli->prepare($sql1);
@@ -91,7 +91,7 @@ else
         {                                                             
             echo "bee0";  
             session_destroy();
-            exit ();
+            exit(0);
         }
         $password=md5(md5($password).$salt);
         $sql="INSERT INTO ".$table." (".$userl.", ".$psdl.", ".$regipl.", ".$saltl.", ".$macl.") VALUES (?,?,?,?,?)";
@@ -102,7 +102,7 @@ else
         {  
             echo"bee4";
             session_destroy();
-            exit;  
+            exit(0);  
         }  
         else   
         {  

@@ -21,7 +21,7 @@ $result=mysqli_query($mysqli,$sql);
 if(!$result)  
 {  
 echo"Wrong";
-exit;  
+exit(0);  
 }
 echo"yes";
 //核心代码结束

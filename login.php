@@ -6,7 +6,7 @@ $mysqli=new mysqli($db_host,$db_user,$db_psw,$db_name,$db_port);
 if(mysqli_connect_errno())
 {
     echo mysqli_connect_error();
-    exit;
+    exit(0);
 }
 $username=htmlspecialchars($_GET['username']);
 $sql="SELECT * FROM ".$table." where ".$userl."=?";
