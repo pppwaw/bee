@@ -58,8 +58,7 @@ else
     $stmt2=$mysqli->prepare($sql2);
     $stmt2->bind_param("s",$mac);
     $stmt2->execute();
-    $resultdata1=mysqli_affected_rows();
-	$count=count($resultdata1);
+	$count=count($stmt2->get_result()->fetch_all(MYSQLI_ASSOC));
         if ($count>$maxreg-1)
         {
             echo"bee3";
@@ -70,8 +69,7 @@ else
         $stmt3=$mysqli->prepare($sql3);
         $stmt3->bind_param("s",$regip);
         $stmt3->execute();
-        $resultdata2=mysqli_affected_rows();
-        $count2=count($resultdata2);
+        $count2=count($stmt3->get_result()->fetch_all(MYSQLI_ASSOC));
         if ($count2>$maxreg-1)
         {
             echo"bee3";
@@ -82,8 +80,7 @@ else
         $stmt1=$mysqli->prepare($sql1);
         $stmt1->bind_param("s",$name);
         $stmt1->execute();
-        $resultdata3=mysqli_affected_rows();;
-        $count3=count($resultdata3);                                 
+        $count3=count($stmt1->get_result()->fetch_all(MYSQLI_ASSOC));                                 
         if ($count3>0)
         {                                                             
             echo "bee0";  
@@ -95,7 +92,7 @@ else
         $stmt4 = $mysqli->prepare($sql);
         $stmt4->bind_param('sssss', $name, $password, $regip,$salt,$mac);
         $stmt4->execute();
-        if(!mysqli_affected_rows()>0)  
+        if(!count($stmt4->get_result()->fetch_all(MYSQLI_ASSOC))>0)  
         {  
             echo"bee4";
             session_destroy();
