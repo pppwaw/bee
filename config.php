@@ -6,6 +6,27 @@ $spsd='服务器访问密码';		//服务器访问密码
 
 $maxreg='2';				//单个用户最大注册数
 
+//以下选项请按照邮箱smtp服务器配置填写
+$smtpserver = "SMTP服务器";			    	//SMTP服务器 
+
+$smtpserverport = 25;						//SMTP服务器端口，默认情况下为25
+
+$smtpusermail = "SMTP服务器的用户邮箱";	    //SMTP服务器的用户邮箱 
+
+$smtpuser = "SMTP服务器的用户帐号";			//SMTP服务器的用户帐号
+
+$smtppass = "SMTP服务器的用户密码";			//SMTP服务器的用户密码
+
+$mailsubject = "BeeLogin注册激活码";		//邮件主题
+
+$mailbody = "您的BeeLogin注册激活码是：";	//邮件内容前段
+
+$mailbodysec = "，请在20分钟之内进行注册";  //邮件内容后段
+
+$mailtype = "TXT";							//邮件格式（HTML/TXT）,TXT为文本邮件 
+
+//以上选项请按照邮箱smtp服务器配置填写
+
 //以下选项请按照Mysql配置填写
 $db_host="数据库地址"; 		//连接的数据库地址
 
