@@ -39,6 +39,11 @@ if($_SESSION['check'] !=$showing||$showing=="")
     session_destroy();
     exit(0);
 }
+if($_SESSION['mailcheck'] != htmlspecialchars($_GET['mailcode'])){
+    echo"bee7";
+    session_destroy();
+    exit(0);
+}
 if($name==""|| $password=="")  
 {  
     echo"bee1"; 
