@@ -19,6 +19,11 @@ if(isset($_GET['id']))
     exit(0);
 }
 session_start();
+if($mailmode==true){
+    echo "unopen";
+    $_SESSION['mailcheck'] = "false";
+    exit(0);
+}
 if($_SESSION['check'] !=$showing||$showing=="")
 {
     echo "beemail1";
