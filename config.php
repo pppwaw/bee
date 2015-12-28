@@ -35,4 +35,17 @@ $macl="mac"; 				//选择用户注册mac所在列
 //以上选项如不明白或不完全清楚请保持默认
 
 //配置代码结束
+
+//防御SQL注入
+$magic_quotes = function_exists('get_magic_quotes_gpc') ? get_magic_quotes_gpc() : false;
+
+ ( !$magic_quotes && (filter($_GET, 'addslashes') && filter($_POST, 'addslashes') && filter($_COOKIE, 'addslashes') && filter($_FILES, 'addslashes')) );        
+
+ function filter(&$array, $function) 
+ {
+         if (!is_array($array)) Return $array = $function($array);
+         foreach ($array as $key => $value) 
+                 (is_array($value) && $array[$key] = filter($value, $function)) || $array[$key] = $function($value);
+         Return $array;
+ }
 ?>
