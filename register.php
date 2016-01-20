@@ -27,7 +27,7 @@ if(mysqli_connect_errno())
 }
 if(isset($_GET['id']))
 {
-    session_id($_GET['id']);
+    session_id(md5(md5($_GET['id'])));
 }else{
     echo "bee5";
     exit(0);
