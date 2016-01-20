@@ -8,6 +8,8 @@ $maxreg='2';				//单个用户最大注册数
 
 $loginsec=false;			//填写false在登录时不使用验证码，填写true在登录时使用验证码
 
+$usecn=false;		        //填写false禁止使用中文及特殊字符，填写true则允许
+
 //以下选项请按照Mysql配置填写
 $db_host="数据库地址"; 		//连接的数据库地址
 
