@@ -17,6 +17,12 @@ $row=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $salt=$row[0][$saltl];
 $password=$row[0][$psdl];
 $psd = md5(md5($_GET['psd']).$salt);
+$showing=$_GET['code'];
+if($loginsec==true&&$_SESSION['check'] !=$showing||$showing=="")
+{
+    echo"unsec";
+    exit(0);
+}
 session_id(md5(md5($_GET['username'])));
 session_start();
 if($psd==$password)
