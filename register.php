@@ -25,6 +25,7 @@ if(mysqli_connect_errno())
     echo mysqli_connect_error();
     exit(0);
 }
+if($usecn=false&&!eregi('^[A-Za-z0-9_]$',$name))die("bee9");
 if(isset($_GET['id']))
 {
     session_id(md5(md5($_GET['id'])));
