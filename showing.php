@@ -60,9 +60,9 @@ class YL_Security_Secoder {
         }   
            
         // 保存验证码   
-        if(isset($_GET['id']))
+        if(isset($_REQUEST['id']))
         {
-        session_id(md5(md5($_GET['id'])));
+        session_id(md5(md5($_REQUEST['id'])));
         }
         session_start();   
         $_SESSION['check'] = join("",$code); // 把验证码保存到session, 验证时注意是大写
