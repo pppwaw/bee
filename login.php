@@ -8,7 +8,7 @@ if(mysqli_connect_errno())
     echo mysqli_connect_error();
     exit(0);
 }
-$username=htmlspecialchars($_GET['username']);
+$username=htmlspecialchars($_REQUEST['username']);
 $sql="SELECT * FROM `".$table."` where `".$userl."`=?";
 $stmt=$mysqli->prepare($sql);
 $stmt->bind_param('s', $username);
@@ -16,19 +16,19 @@ $stmt->execute();
 $row=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $salt=$row[0][$saltl];
 $password=$row[0][$psdl];
-$psd = md5(md5($_GET['psd']).$salt);
-$showing=$_GET['code'];
+$psd = md5(md5($_REQUEST['psd']).$salt);
+$showing=$_REQUEST['code'];
 if($loginsec==true&&$_SESSION['check'] !=$showing||$showing=="")
 {
     echo"unsec";
     exit(0);
 }
-session_id(md5(md5($_GET['username'])));
+session_id(md5(md5($_REQUEST['username'])));
 session_start();
 if($psd==$password)
 {
     $_SESSION['islogin'] = "yes";
-    $_SESSION['ip'] = $_GET["ip"];
+    $_SESSION['ip'] = $_REQUEST["ip"];
     echo "yes";  
 }
 else 
