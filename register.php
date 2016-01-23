@@ -13,22 +13,22 @@ function saltgen( $length = 6 ) {
 
     return $password;
 }
-$name=htmlspecialchars($_GET['username']);  
-$pwd_again=htmlspecialchars($_GET['pwd_again']);  
+$name=htmlspecialchars($_REQUEST['username']);  
+$pwd_again=htmlspecialchars($_REQUEST['pwd_again']);  
 $salt=saltgen();
-$password=htmlspecialchars($_GET['password']); 
-$mac=htmlspecialchars($_GET['mac']);
-$regip=htmlspecialchars($_GET['regip']);
-$showing=$_GET['code'];
+$password=htmlspecialchars($_REQUEST['password']); 
+$mac=htmlspecialchars($_REQUEST['mac']);
+$regip=htmlspecialchars($_REQUEST['regip']);
+$showing=$_REQUEST['code'];
 if(mysqli_connect_errno())
 {
     echo mysqli_connect_error();
     exit(0);
 }
 if($usecn=false&&!eregi('^[A-Za-z0-9_]$',$name))die("bee9");
-if(isset($_GET['id']))
+if(isset($_REQUEST['id']))
 {
-    session_id(md5(md5($_GET['id'])));
+    session_id(md5(md5($_REQUEST['id'])));
 }else{
     echo "bee5";
     exit(0);
