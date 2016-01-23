@@ -1,7 +1,7 @@
 <?php
-if(isset($_GET['ip'])&&isset($_GET['n'])){
-    session_id(md5(md5($_GET['n'])));
+if(isset($_REQUEST['ip'])&&isset($_REQUEST['n'])){
+    session_id(md5(md5($_REQUEST['n'])));
     session_start();
-    $_SESSION['ips'] = $_GET['ip'];
+    $_SESSION['ips'] = $_REQUEST['ip'];
 }
 ?>
