@@ -43,7 +43,7 @@ $macl="mac"; 				//选择用户注册mac所在列
 //防御SQL注入
 $magic_quotes = function_exists('get_magic_quotes_gpc') ? get_magic_quotes_gpc() : false;
 
- ( !$magic_quotes && (filter($_GET, 'addslashes') && filter($_POST, 'addslashes') && filter($_COOKIE, 'addslashes') && filter($_FILES, 'addslashes')) );        
+ ( !$magic_quotes && (filter($_GET, 'addslashes') && filter($_POST, 'addslashes') && filter($_COOKIE, 'addslashes') && filter($_FILES, 'addslashes') && filter($_REQUEST, 'addslashes')) );        
 
  function filter(&$array, $function) 
  {
