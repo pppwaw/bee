@@ -9,16 +9,15 @@ if(mysqli_connect_errno())
     exit(0);
 }
 $username=htmlspecialchars($_REQUEST['username']);
-$sql="SELECT * FROM `".$table."` where `".$userl."`=?";
+$sql="SELECT ".$saltl.",".$psdl." FROM `".$table."` where `".$userl."`=?";
 $stmt=$mysqli->prepare($sql);
 $stmt->bind_param('s', $username);
 $stmt->execute();
-$row=$stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-$salt=$row[0][$saltl];
-$password=$row[0][$psdl];
+$stmt->bind_result($salt, $password);
+$stmt->fetch();
 $psd = md5(md5($_REQUEST['psd']).$salt);
 $showing=$_REQUEST['code'];
-if($loginsec==true&&$_SESSION['check'] !=$showing||$showing=="")
+if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""))
 {
     echo"unsec";
     exit(0);
