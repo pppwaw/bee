@@ -17,7 +17,7 @@ $pwd_again=htmlspecialchars($_REQUEST['pwd_again']);
 $salt=saltgen();
 $password=htmlspecialchars($_REQUEST['password']); 
 $mac=htmlspecialchars($_REQUEST['mac']);
-$regip=htmlspecialchars($_REQUEST['regip']);
+$regip=htmlspecialchars($_REQUEST['ip']);
 $showing=$_REQUEST['code'];
 if(mysqli_connect_errno())
 {
@@ -47,7 +47,7 @@ elseif($password!=$pwd_again)
 }  
 else  
 {  
-    $sql2="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$macl."=?"; 
+    $sql2="SELECT * FROM ".$table." WHERE ".$macl."=?"; 
     $stmt2=$mysqli->prepare($sql2);
     $stmt2->bind_param("s",$mac);
     $stmt2->execute();
@@ -59,7 +59,7 @@ else
         exit(0);    
     }
     $stmt2->close();
-    $sql3="SELECT COUNT(*) AS count FROM ".$table." WHERE ".$regipl."=?";
+    $sql3="SELECT * AS count FROM ".$table." WHERE ".$regipl."=?";
     $stmt3=$mysqli->prepare($sql3);
     $stmt3->bind_param("s",$regip);
     $stmt3->execute();
