@@ -32,6 +32,10 @@ if(isset($_REQUEST['id']))
     exit(0);
 }
 session_start();
+if($loginsec)if($_SESSION['check'] !=$showing||$showing==""){
+    session_destroy();
+    die('6');
+}
 if($name==""|| $password=="")  
 {  
     echo"bee1"; 
