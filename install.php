@@ -1,7 +1,12 @@
 <?php
 //核心代码开始
 error_reporting(E_ALL ^ E_NOTICE);
+
+$hc='<meta charset="utf-8">';//htmlCharset
+if(file_exists('install.lock'))exit($hc.'请删除当前目录下的install.lock后继续安装');
+
 include 'config.php';
+
 $sql = "CREATE TABLE ".$table."(
 ".$uidl." int NOT NULL AUTO_INCREMENT, 
 PRIMARY KEY(".$uidl."),
@@ -17,12 +22,20 @@ if(mysqli_connect_errno())
     echo mysqli_connect_error();
     exit;
 }
-$result=mysqli_query($mysqli,$sql);  
+$result=mysqli_query($mysqli,$sql); 
+
 if(!$result)  
 {  
-echo"Wrong";
-exit(0);  
+    exit($hc.'数据表已经被建立了,请尝试修改数据表名');  
+}else{
+    echo 'yes<br>';
+    $f=@fopen('install.lock','w');
+    if(!$f){
+        exit($hc.'锁定文件创建失败,为保证安全,请手动删除install.php!');
+    }else{
+        fwrite($f,time());
+        fclose($f);
+    }
 }
-echo"yes";
 //核心代码结束
 ?>
