@@ -59,7 +59,7 @@ else
         exit(0);    
     }
     $stmt2->close();
-    $sql3="SELECT * AS count FROM ".$table." WHERE ".$regipl."=?";
+    $sql3="SELECT * FROM ".$table." WHERE ".$regipl."=?";
     $stmt3=$mysqli->prepare($sql3);
     $stmt3->bind_param("s",$regip);
     $stmt3->execute();
