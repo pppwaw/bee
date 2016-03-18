@@ -2,21 +2,21 @@
 //核心代码开始
 error_reporting(E_ALL ^ E_NOTICE);
 include 'config.php';
-session_id(md5($_GET['username']));
+session_id(md5($_REQUEST['username']));
 session_start();
-if ($_GET['username']==""){
+if ($_REQUEST['username']==""){
     echo "no";
     exit(0);
 }
-elseif($_GET['ip']==""){
+elseif($_REQUEST['ip']==""){
     echo "no";
     exit(0);
 }
-elseif(md5(md5($_SESSION['ip'])) != $_GET['ip']){
+elseif(md5(md5($_SESSION['ip'])) != $_REQUEST['ip']){
     echo "no";
     exit(0);
 }
-elseif($_GET['spsd']!=md5(md5($spsd))){
+elseif($_REQUEST['spsd']!=md5(md5($spsd))){
     echo "badserver";
     exit(0);
 }
@@ -29,7 +29,15 @@ else
     elseif ($_SESSION['islogin'] == "yes")
     {
         $_SESSION['ischecked'] = "yes";
-        echo "yes";
+		if ($usingToken){
+			if ($_REQUEST['token'] == $_SESSION['token']){
+				echo "yes";
+			}else{
+				echo "no";
+			}
+		}else{
+			echo "yes";
+		}
     }
 }
 //核心代码结束
