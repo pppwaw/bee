@@ -12,7 +12,7 @@ elseif($_REQUEST['ip']==""){
     echo "no";
     exit(0);
 }
-elseif(md5(md5($_SESSION['ip'])) != $_REQUEST['ip']){
+elseif(!$_SESSION['islogin']=="yes"){
     echo "no";
     exit(0);
 }
@@ -22,23 +22,26 @@ elseif($_REQUEST['spsd']!=md5(md5($spsd))){
 }
 else
 {
-    if ($_SESSION['islogin']=="no"){
+    if (md5(md5($_SESSION['ip'])) != $_REQUEST['ip'] && $usingToken == false){
         $_SESSION['ischecked']="no";
         echo "no";
     }
-    elseif ($_SESSION['islogin'] == "yes")
+	elseif(md5(md5($_SESSION['ip'])) == $_REQUEST['ip'] && $usingToken == false){
+		echo "yes";
+		$_SESSION['ischecked'] = "yes";
+	}
+    elseif ($usingToken)
     {
-        $_SESSION['ischecked'] = "yes";
-		if ($usingToken){
-			if ($_REQUEST['token'] == $_SESSION['token']){
-				echo "yes";
-			}else{
-				echo "no";
-			}
-		}else{
+		if ($_REQUEST['token'] == $_SESSION['token']){
 			echo "yes";
+			$_SESSION['ischecked'] = "yes";
+		}else{
+			echo "no";
+		$_SESSION['ischecked'] = "no";
 		}
-    }
+	}else{
+		echo 'no'
+	}
 }
 //核心代码结束
 ?>
