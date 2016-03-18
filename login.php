@@ -28,11 +28,26 @@ if($psd==$password)
 {
     $_SESSION['islogin'] = "yes";
     $_SESSION['ip'] = $_REQUEST["ip"];
-    echo "yes";  
+    echo "yes";
+	if(isset($_REQUEST['gettoken'])){
+		$token = tokengen(64);
+		$_SESSION['token'] = $token;
+		echo ';'+$token;
+	}
 }
 else 
 {
     echo 'no';
+}
+
+function tokengen( $length = 64 ) {
+    $chars = 'abcdefghijklmnopqrstuvwxyz012345678901234567890123456789';
+    $token = '';
+    for ( $i = 0; $i < $length; $i++ ) 
+    {
+        $token .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+    }
+    return $token;
 }
 //核心代码结束
 ?>
