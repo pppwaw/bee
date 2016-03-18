@@ -10,6 +10,8 @@ $loginsec=false;			//填写false在登录时不使用验证码，填写true在�
 
 $usecn=false;		        //填写false禁止使用中文及特殊字符，填写true则允许
 
+$usingToken=false;	        //填写true需要安装相应的验证mod，同时使用token验证解决ip获取问题，填写false使用ip验证
+
 //以下选项请按照Mysql配置填写
 $db_host="数据库地址"; 		//连接的数据库地址
 
