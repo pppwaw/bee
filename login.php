@@ -10,7 +10,7 @@ if(mysqli_connect_errno())
 }
 $username=htmlspecialchars($_REQUEST['username']);
 $showing=$_REQUEST['code'];
-if($_SESSION['wrongcount']>=$MaxWorngTime&&$enableCodeAfterWorngTime){
+if($_SESSION['wrongcount']>=$MaxWorngTime&&$enableCodeAfterWorng){
 	if(!isset($_REQUEST['code'])||!isset($_SESSION['check'])){
 			echo 'PleaseUsingCode';
 			exit(0);
