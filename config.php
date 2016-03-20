@@ -6,6 +6,10 @@ $spsd='服务器访问密码';		//服务器访问密码
 
 $maxreg='2';				//单个用户最大注册数
 
+$enableCodeAfterWorng=true	//启用连续错误数量超过限制时强制使用验证码
+
+$$MaxWorngTime='2';			//每个用户最大连续错误数量，超过会强制使用验证码
+
 $loginsec=false;			//填写false在登录时不使用验证码，填写true在登录时使用验证码
 
 $usecn=false;		        //填写false禁止使用中文及特殊字符，填写true则允许
