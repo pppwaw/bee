@@ -9,6 +9,14 @@ if(mysqli_connect_errno())
     exit(0);
 }
 $username=htmlspecialchars($_REQUEST['username']);
+$showing=$_REQUEST['code'];
+if($_SESSION['wrongcount']>=$MaxWorngTime&&$enableCodeAfterWorngTime){
+	if(!isset($_REQUEST['code'])||!isset($_SESSION['check'])){
+			echo 'PleaseUsingCode';
+			exit(0);
+	}
+	$loginsec=true;
+}
 $sql="SELECT ".$saltl.",".$psdl." FROM `".$table."` where `".$userl."`=?";
 $stmt=$mysqli->prepare($sql);
 $stmt->bind_param('s', $username);
@@ -16,9 +24,9 @@ $stmt->execute();
 $stmt->bind_result($salt, $password);
 $stmt->fetch();
 $psd = md5(md5($_REQUEST['psd']).$salt);
-$showing=$_REQUEST['code'];
-if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""))
+if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""||!isset($_SESSION['check'])))
 {
+	unset(_SESSION['check']);
     echo"unsec";
     exit(0);
 }
@@ -28,10 +36,12 @@ if($psd==$password)
 {
     $_SESSION['islogin'] = "yes";
     $_SESSION['ip'] = $_REQUEST["ip"];
+	unset($_SESSION['wrongcount']);
     echo "yes";  
 }
 else 
 {
+	$_SESSION['wrongcount']=$_SESSION['wrongcount']+1
     echo 'no';
 }
 //核心代码结束
