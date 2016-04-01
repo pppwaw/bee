@@ -26,7 +26,7 @@ $stmt->fetch();
 $psd = md5(md5($_REQUEST['psd']).$salt);
 if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""||!isset($_SESSION['check'])))
 {
-	unset(_SESSION['check']);
+	unset($_SESSION['check']);
     echo"unsec";
     exit(0);
 }
@@ -37,11 +37,11 @@ if($psd==$password)
     $_SESSION['islogin'] = "yes";
     $_SESSION['ip'] = $_REQUEST["ip"];
 	unset($_SESSION['wrongcount']);
-    echo "yes";  
+    echo "yes";
 }
 else 
 {
-	$_SESSION['wrongcount']=$_SESSION['wrongcount']+1
+	$_SESSION['wrongcount']=$_SESSION['wrongcount']+1;
     echo 'no';
 }
 //核心代码结束
