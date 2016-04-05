@@ -10,7 +10,9 @@ if(mysqli_connect_errno())
 }
 $username=htmlspecialchars($_REQUEST['username']);
 $showing=$_REQUEST['code'];
-if($_SESSION['wrongcount']>=$MaxWorngTime&&$enableCodeAfterWorng){
+session_id(md5(md5($_REQUEST['username'])));
+session_start();
+if($_SESSION['wrongcount']>$MaxWorngTime&&$enableCodeAfterWorng){
 	if(!isset($_REQUEST['code'])||!isset($_SESSION['check'])){
 			echo 'PleaseUsingCode';
 			exit(0);
@@ -22,7 +24,7 @@ $stmt=$mysqli->prepare($sql);
 $stmt->bind_param('s', $username);
 $stmt->execute();
 $stmt->bind_result($salt, $password);
-$stmt->fetch();
+$stmt->fetch(); 
 $psd = md5(md5($_REQUEST['psd']).$salt);
 if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""||!isset($_SESSION['check'])))
 {
@@ -30,8 +32,6 @@ if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""||!isset($_SES
     echo"unsec";
     exit(0);
 }
-session_id(md5(md5($_REQUEST['username'])));
-session_start();
 if($psd==$password)
 {
     $_SESSION['islogin'] = "yes";
