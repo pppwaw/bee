@@ -12,7 +12,11 @@ elseif($_GET['ip']==""){
     echo "no";
     exit(0);
 }
-elseif(md5(md5($_SESSION['ip'])) != $_GET['ip']){
+elseif(md5(md5($_SESSION['ip'])) != $_GET['ip']&&$checkIp){
+    echo "no";
+    exit(0);
+}
+elseif(md5(md5($_SESSION['token'])) != $_GET['token']&&$usingMod){
     echo "no";
     exit(0);
 }
