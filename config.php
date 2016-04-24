@@ -4,6 +4,10 @@ error_reporting(E_ALL ^ E_NOTICE);
 //配置代码开始
 $spsd='服务器访问密码';		//服务器访问密码
 
+$checkIp=true               //是否检查ip，填写true检查，false不检查，ip检查和mod使用至少开启其中之一，否则只有白名单的效果
+
+$usingMod=false             //是否使用辅助mod，填写true使用，false不使用，ip检查和mod使用至少开启其中之一，否则只有白名单的效果
+
 $maxreg='2';				//单个用户最大注册数
 
 $enableCodeAfterWorng=false;//启用连续错误数量超过限制时强制使用验证码
