@@ -45,9 +45,13 @@ if($psd==$password)
 {
     $_SESSION['islogin'] = "yes";
     $_SESSION['ip'] = $_REQUEST["ip"];
-    $_SESSION['token'] = tokengen();
-	unset($_SESSION['wrongcount']);
-    echo "yes;".$_SESSION['token'];
+    unset($_SESSION['wrongcount']);
+    if($usingMod){
+        $_SESSION['token'] = tokengen();
+        echo "yes;".$_SESSION['token'];
+    }else{
+        echo "yes";
+    }
 }
 else 
 {
