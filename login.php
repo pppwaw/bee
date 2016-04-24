@@ -1,5 +1,14 @@
 <?php
 //核心代码开始
+function tokengen( $length = 32 ) {
+    $chars = 'abcdefghijklmnopqrstuvwxyz012345678901234567890123456789';
+    $password = '';
+    for ( $i = 0; $i < $length; $i++ ) 
+    {
+        $password .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+    }
+    return $password;
+}
 error_reporting(E_ALL ^ E_NOTICE);
 include 'config.php';
 $mysqli=new mysqli($db_host,$db_user,$db_psw,$db_name,$db_port);
@@ -36,8 +45,9 @@ if($psd==$password)
 {
     $_SESSION['islogin'] = "yes";
     $_SESSION['ip'] = $_REQUEST["ip"];
+    $_SESSION['token'] = tokengen();
 	unset($_SESSION['wrongcount']);
-    echo "yes";
+    echo "yes;".$_SESSION['token'];
 }
 else 
 {
