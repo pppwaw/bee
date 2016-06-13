@@ -14,7 +14,7 @@ include 'config.php';
 $mysqli=new mysqli($db_host,$db_user,$db_psw,$db_name,$db_port);
 if(mysqli_connect_errno())
 {
-    echo mysqli_connect_error();
+    echo json_encode(Array("result"=>false,"reason"=>10003,"reasonHuman"=>mysqli_connect_error()));
     exit(0);
 }
 $username=htmlspecialchars($_REQUEST['username']);
@@ -23,7 +23,7 @@ session_id(md5(md5($_REQUEST['username'])));
 session_start();
 if($_SESSION['wrongcount']>$MaxWorngTime&&$enableCodeAfterWorng){
 	if(!isset($_REQUEST['code'])||!isset($_SESSION['check'])){
-            echo json_encode(Array("result"=>false,"reason"=>"2","reasonHuman"=>$messageVerificationCodeWrong));
+            echo json_encode(Array("result"=>false,"reason"=>2,"reasonHuman"=>$messageVerificationCodeWrong));
 			exit(0);
 	}
 	$loginsec=true;

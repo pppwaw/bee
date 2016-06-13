@@ -34,7 +34,7 @@ if(isset($_REQUEST['id']))
 session_start();
 if($_SESSION['check'] !=$showing||$showing=="")
 {
-    echo json_encode(Array("result"=>false,"reason"=>"2","reasonHuman"=>$messageVerificationCodeWrong));
+    echo json_encode(Array("result"=>false,"reason"=>2,"reasonHuman"=>$messageVerificationCodeWrong));
     session_destroy();
     exit;
 }
@@ -101,7 +101,7 @@ else
     }
     else   
     {
-        echo json_encode(Array("result"=>true,"reason"=>10002));
+        echo json_encode(Array("result"=>true));
         session_destroy();
     }
     $stmt4->close();
