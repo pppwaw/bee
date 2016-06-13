@@ -13,12 +13,12 @@ $stmt1->num_rows;
 $count=$stmt1->num_rows;
 if ($count>0)
 {
-    echo "yes";
+    echo json_encode(Array("result"=>true));
     exit (0);
 }
 else
 {
-    echo "no";
+    echo json_encode(Array("result"=>false,"reason"=>3,"reasonHuman"=>$messageNotRegisted));
     exit(0);
 }
 //核心代码结束

@@ -28,25 +28,25 @@ if(isset($_REQUEST['id']))
 {
     session_id(md5(md5($_REQUEST['id'])));
 }else{
-    echo "bee5";
+    echo json_encode(Array("result"=>false,"reason"=>0,"reasonHuman"=>$messageRequiredMoreArgs));
     exit(0);
 }
 session_start();
 if($_SESSION['check'] !=$showing||$showing=="")
 {
-    echo"bee6";
+    echo json_encode(Array("result"=>false,"reason"=>"2","reasonHuman"=>$messageVerificationCodeWrong));
     session_destroy();
     exit;
 }
 if($name==""|| $password=="")  
 {  
-    echo"bee1"; 
+    echo json_encode(Array("result"=>false,"reason"=>0,"reasonHuman"=>$messageRequiredMoreArgs));
     session_destroy();
     exit(0);
 }  
 elseif($password!=$pwd_again)  
 {  
-    echo"bee2"; 
+    echo json_encode(Array("result"=>false,"reason"=>5,"reasonHuman"=>$messageVerificationPasswordWrong));
     session_destroy();
     exit(0);  
       
@@ -60,7 +60,7 @@ else
     $stmt2->store_result();
     if ($stmt2->num_rows>$maxreg-1)
     {
-        echo"bee3";
+        echo json_encode(Array("result"=>false,"reason"=>6,"reasonHuman"=>$messageRegisteLimited));
         session_destroy();
         exit(0);    
     }
@@ -72,7 +72,7 @@ else
     $stmt3->store_result();
     if ($stmt3->num_rows>$maxreg-1)
     {
-        echo"bee3";
+        echo json_encode(Array("result"=>false,"reason"=>6,"reasonHuman"=>$messageRegisteLimited));
         session_destroy();
         exit(0);    
     }
@@ -84,7 +84,7 @@ else
     $stmt1->store_result();
     if ($stmt1->num_rows>0)
     {
-        echo "bee0";  
+        echo json_encode(Array("result"=>false,"reason"=>7,"reasonHuman"=>$messageAlreadyHaveSameUsername));
         session_destroy();
         exit(0);
     }
@@ -95,13 +95,13 @@ else
     $stmt4->bind_param('sssss', $name, $password, $regip,$salt,$mac);
     if(!$stmt4->execute())
     {
-        echo"bee4";
+        echo json_encode(Array("result"=>false,"reason"=>10002));
         session_destroy();
         exit(0);  
     }
     else   
     {
-        echo"ok";
+        echo json_encode(Array("result"=>true,"reason"=>10002));
         session_destroy();
     }
     $stmt4->close();

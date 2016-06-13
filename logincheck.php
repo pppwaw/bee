@@ -28,12 +28,12 @@ else
 {
     if ($_SESSION['islogin']=="no"){
         $_SESSION['ischecked']="no";
-        echo "no";
+        echo json_encode(Array("result"=>false,"reson"=>10001));
     }
     elseif ($_SESSION['islogin'] == "yes")
     {
         $_SESSION['ischecked'] = "yes";
-        echo "yes";
+        echo json_encode(Array("result"=>true));
     }
 }
 //核心代码结束

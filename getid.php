@@ -1,4 +1,4 @@
 <?php
     session_start();
-    echo session_id();
+    echo json_encode(Array("result"=>true,"id"=>session_id()));
 ?>

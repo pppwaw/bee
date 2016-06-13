@@ -23,7 +23,7 @@ session_id(md5(md5($_REQUEST['username'])));
 session_start();
 if($_SESSION['wrongcount']>$MaxWorngTime&&$enableCodeAfterWorng){
 	if(!isset($_REQUEST['code'])||!isset($_SESSION['check'])){
-			echo 'PleaseUsingCode';
+            echo json_encode(Array("result"=>false,"reason"=>"2","reasonHuman"=>$messageVerificationCodeWrong));
 			exit(0);
 	}
 	$loginsec=true;
@@ -38,7 +38,7 @@ $psd = md5(md5($_REQUEST['psd']).$salt);
 if(($loginsec==true)&&($_SESSION['check'] !=$showing||$showing==""||!isset($_SESSION['check'])))
 {
 	unset($_SESSION['check']);
-    echo"unsec";
+    echo json_encode(Array("result"=>false,"reason"=>"2","reasonHuman"=>$messageVerificationCodeWrong));
     exit(0);
 }
 if($psd==$password)
@@ -48,15 +48,15 @@ if($psd==$password)
     unset($_SESSION['wrongcount']);
     if($usingMod){
         $_SESSION['token'] = tokengen();
-        echo "yes;".$_SESSION['token'];
+        echo json_encode(Array("result"=>true,"useToken"=>true,"token"=>$_SESSION['token']));
     }else{
-        echo "yes";
+        echo json_encode(Array("result"=>true,"useToken"=>false));
     }
 }
 else 
 {
 	$_SESSION['wrongcount']=$_SESSION['wrongcount']+1;
-    echo 'no';
+    echo json_encode(Array("result"=>false,"reason"=>1,"reasonHuman"=>$messageUsernameOrPasswordWrong,"useToken"=>false));
 }
 //核心代码结束
 ?>

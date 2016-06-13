@@ -2,6 +2,35 @@
 error_reporting(E_ALL ^ E_NOTICE);
 
 //配置代码开始
+$messageUsernameOrPasswordWrong
+=
+'';
+
+$messageVerificationCodeWrong
+=
+'';
+
+$messageRequiredMoreArgs
+=
+'';
+
+$messageNotRegisted
+=
+'';
+
+$messageVerificationPasswordWrong
+=
+'';
+
+$messageRegisteLimited
+=
+'';
+
+
+$messageAlreadyHaveSameUsername
+=
+'';
+
 $spsd='服务器访问密码';		//服务器访问密码
 
 $checkIp=true;              //是否检查ip，填写true检查，false不检查，ip检查和mod使用至少开启其中之一，否则只有白名单的效果
